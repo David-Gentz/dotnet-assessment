@@ -1,3 +1,6 @@
+using System;
+using System.Text.RegularExpressions;
+
 namespace TGS.Challenge
 {
   /*
@@ -22,9 +25,29 @@ namespace TGS.Challenge
      */
     public class Anagram
     {
-      public bool AreAnagrams(string word1, string word2)
-      {
-        return false;
-      }
+        public bool AreAnagrams(string word1, string word2)
+        {
+            if (string.IsNullOrEmpty(word1) || string.IsNullOrEmpty(word2))
+                throw new ArgumentException();
+
+            word1 = Regex.Replace(word1, @"[^0-9a-zA-Z]+", "");
+            word2 = Regex.Replace(word2, @"[^0-9a-zA-Z]+", "");
+
+            var word1CharArray = word1.Trim().ToLower().ToCharArray();
+            var word2CharArray = word2.Trim().ToLower().ToCharArray();
+
+            Array.Sort(word1CharArray);
+            Array.Sort(word2CharArray);
+
+            for (int i = 0; i < word1CharArray.Length; i++)
+            {
+                if (word1CharArray[i] != word2CharArray[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
