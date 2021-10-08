@@ -34,11 +34,11 @@ namespace TGS.Challenge.Tests
     }
 
     [Test()]
-    public void Funeral_IsAnagram_Reel_fun()
+    public void Funeral_Is_NOT_Anagram_Reel_fun()
     {
       var result = _anagram.AreAnagrams("Funeral", "Reel fun");
 
-      Assert.IsTrue(result);
+      Assert.IsFalse(result);
     }
 
     [Test()]
