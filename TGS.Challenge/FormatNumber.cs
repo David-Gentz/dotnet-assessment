@@ -26,7 +26,34 @@ namespace TGS.Challenge
     {
         public string Format(int value)
         {
-            return string.Empty;
+            if (value < 0)
+                throw new ArgumentOutOfRangeException();
+
+            if (value >= 1000000000)
+                throw new ArgumentOutOfRangeException();
+
+            var stringValue = value.ToString();
+            var reversedValue = string.Empty;
+
+            for (int i = stringValue.Length - 1; i >= 0; i--)
+            {
+                reversedValue += stringValue[i];
+                var reversedNormalValue = reversedValue.Replace(",", string.Empty);
+
+                if (reversedNormalValue.Length != stringValue.Length && reversedNormalValue.Length % 3 == 0)
+                    reversedValue += ",";
+            }
+
+            string formattedValue = Reverse(reversedValue);
+
+            return formattedValue;
+        }
+
+        public string Reverse(string value)
+        {
+            var charArray = value.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
     }
 }
