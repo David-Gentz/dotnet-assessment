@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 
 namespace TGS.Challenge.Tests
 {
@@ -45,27 +46,9 @@ namespace TGS.Challenge.Tests
         }
 
         [Test()]
-        public void Returns_Neg1_ForEmptyNumberSequence()
+        public void BiggerThanMaxNumber_Throws_ArgumentOutOfRangeException()
         {
-            var index = _equivalenceIndex.Find(new int[] { });
-
-            Assert.AreEqual(-1, index);
-        }
-
-        [Test()]
-        public void Returns_Neg1_ForNumberSequenceWithNegativeValue()
-        {
-            var index = _equivalenceIndex.Find(new int[] { 1, 3, 4, -1, 10, 22 });
-
-            Assert.AreEqual(-1, index);
-        }
-
-        [Test()]
-        public void Returns_Neg1_ForNumberSequenceWithValueGreaterThanOneHundredThousand()
-        {
-            var index = _equivalenceIndex.Find(new int[] { 1, 3, 1000001, 4, 10, 22 });
-
-            Assert.AreEqual(-1, index);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _equivalenceIndex.Find(new int[100001]));
         }
     }  
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace TGS.Challenge
 {
   /*
@@ -19,8 +21,8 @@ namespace TGS.Challenge
     {
       public int Find(int[] numbers)
       {
-            if (numbers.Length == 0)
-                return -1;
+            if (numbers.Length > 100000)
+                throw new ArgumentOutOfRangeException();
 
             int leftSum;
             int rightSum;
@@ -29,9 +31,6 @@ namespace TGS.Challenge
 
             for (i = 0; i < numbers.Length; i++)
             {
-                if (numbers[i] <= 0 || numbers[i] >= 100000)
-                    return -1;
-
                 leftSum = 0;
                 rightSum = 0;
 
